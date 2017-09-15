@@ -1,0 +1,97 @@
+<script src="https://unpkg.com/vue"></script>
+
+<div id="userInputText">
+  <h1>User Input Text</h1>
+  <p>{{ message }}</p>
+  <input v-model="message">
+</div>
+
+<div id="userInput">
+  <h1>User Input Button</h1>
+  <p>{{ message }}</p>
+  <button v-on:click="reverseMessage">Reverse Message</button>
+</div>
+
+<div id="for-loop">
+  <h1>For Loop</h1>
+  <li v-for="todo in todos">
+      {{todo.text}}
+  </li>
+</div>
+
+
+<div id="conditionals">
+  <h1>Conditionals</h1>
+  <p v-if="seen">Now you see me</p>
+</div>
+
+<div id="bound">
+    <h1>Bound</h1>
+    <span v-bind:title="message">
+      Hover mouse for a few seconds
+      to see my dynamically bound title
+    </span>
+</div>
+
+
+<div id="app">
+  <h1>Hello</h1>
+  {{ message }}
+</div>
+
+
+
+
+<script>
+var app6 = new Vue({
+  el: '#userInputText',
+  data: {
+    message: 'Hello Vue!'
+  }
+})
+
+var app5 = new Vue({
+  el: '#userInput',
+  data: {
+    message: 'Hello Vue.js!'
+  },
+  methods: {
+    reverseMessage: function () {
+      this.message = this.message.split('').reverse().join('')
+    }
+  }
+})
+
+var forLoop = new Vue({
+  el: '#for-loop',
+  data: {
+    todos: [
+      { text: 'Learn JavaScript' },
+      { text: 'Learn Vue' },
+      { text: 'Build something awesome' }
+    ]
+  }
+})
+
+var conditionals = new Vue({
+  el: '#conditionals',
+  data: {
+    seen: true
+  }
+})
+
+var bound = new Vue({
+  el: '#bound',
+  data: {
+    message: 'You loaded this page on '
+    + new Date().toLocaleString()
+  }
+})
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue!'
+  }
+})
+</script>
