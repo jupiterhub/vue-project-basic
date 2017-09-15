@@ -1,6 +1,9 @@
-# my-project-cli
+# Jupiter's Conclusion
+TBD
 
-> A Vue.js project
+# vue-project-basic
+
+> A Vue.js project, basics
 
 ## Build Setup
 
