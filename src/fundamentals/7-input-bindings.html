@@ -1,0 +1,106 @@
+<script src="https://unpkg.com/vue"></script>
+
+<div id="input-bindings">
+  <!--Text -->
+  <input v-model="message" placeholder="edit me">
+  <p>Message is: {{ message }}</p>
+  <br/>
+
+  <!--Textarea -->
+  <span>Multiline message is:</span>
+  <p style="white-space: pre-line">{{ message }}</p>
+  <textarea v-model="message" placeholder="add multiple lines"></textarea>
+  <input type="checkbox" id="checkbox" v-model="checked">
+  <br/>
+
+  <!-- Checkbox -->
+  <label for="checkbox">{{ checked }}</label>
+  <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+  <label for="jack">Jack</label>
+  <input type="checkbox" id="john" value="John" v-model="checkedNames">
+  <label for="john">John</label>
+  <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+  <label for="mike">Mike</label>
+  <br>
+  <span>Checked names: {{ checkedNames }}</span>
+  <br/>
+
+  <!-- Radio -->
+  <input type="radio" id="one" value="One" v-model="picked">
+  <label for="one">One</label>
+  <br>
+  <input type="radio" id="two" value="Two" v-model="picked">
+  <label for="two">Two</label>
+  <br>
+  <span>Picked: {{ picked }}</span>
+  <br/>
+
+  <!-- Select -->
+  <select v-model="selected">
+  <option disabled value="">Please select one</option>
+  <option>A</option>
+  <option>B</option>
+  <option>C</option>
+  </select>
+  <span>Selected: {{ selected }}</span>
+  <br/>
+
+  <!-- Multiple Select -->
+  <select v-model="selectedMultiple" multiple>
+  <option>A</option>
+  <option>B</option>
+  <option>C</option>
+  </select>
+  <br>
+  <span>Selected: {{ selectedMultiple }}</span>
+  <br/>
+
+  <!-- Dynamic Options -->
+  <select v-model="selected">
+  <option v-for="option in options" v-bind:value="option.value">
+    {{ option.text }}
+  </option>
+  </select>
+  <span>Selected: {{ selected }}</span>
+
+  <!-- Use of v-bind example
+  <input
+  type="checkbox"
+  v-model="toggle"
+  v-bind:true-value="a"
+  v-bind:false-value="b"
+>
+
+// when checked:
+vm.toggle === vm.a
+// when unchecked:
+vm.toggle === vm.b
+  -->
+
+  <!-- synced after "change" instead of "input" -->
+  <input v-model.lazy="message" >
+  <!-- typecast to number -->
+  <input v-model.number="age" type="number" placeholder="numbers only">
+
+  <input v-model.trim="message" placeholder="trimmed automatically">
+</div>
+
+<script>
+new Vue({
+  el: '#input-bindings',
+  data: {
+    message : '',
+    checked : false,
+    checkedNames : [],
+    picked : '',
+    selectedMultiple: [],
+    selected : '',
+    options: [
+      { text: 'One', value: 'A' },
+      { text: 'Two', value: 'B' },
+      { text: 'Three', value: 'C' }
+    ],
+    age : ''
+  }
+});
+</script>
