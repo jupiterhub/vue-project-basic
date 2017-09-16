@@ -1,0 +1,65 @@
+<script src="https://unpkg.com/vue"></script>
+
+<div id="container">
+  <h1 v-if="true">Yes</h1>
+  <h1 v-else>No</h1>
+
+  <!--If you want to toggle more elemnt use template -->
+  <template v-if="true">
+    <h1>Title</h1>
+    <p>Paragraph 1</p>
+    <p>Paragraph 2</p>
+  </template>
+
+  <div v-if="Math.random() > 0.5">
+    Now you see me
+  </div>
+  <div v-else>
+    Now you don't
+  </div>
+
+  <div v-if="type === 'A'">
+    A
+  </div>
+  <div v-else-if="type === 'B'">
+    B
+  </div>
+  <div v-else-if="type === 'C'">
+    C
+  </div>
+  <div v-else>
+    Not A/B/C
+  </div>
+
+  <!-- even if there are 2 different inputs, vue resuses  the value on both, to prevent this add a key attribute -->
+  <template v-if="loginType === 'username'">
+    <label>Username</label>
+    <input placeholder="Enter your username"  key="same-input">
+  </template>
+  <template v-else>
+    <label>Email</label>
+    <input placeholder="Enter your email address" key="same-input">
+  </template>
+  <button v-on:click="toggleLoginType">Toggle Type</button>
+
+  <!-- v-show will always be rendered in the DOM, doesn't support template and v-else -->
+  <!-- v-if has higher toggle cost, v-show has high initial render cost. -->
+  <!-- use v-show = if you need to toggle often, use v-if= if it is unlikely to change in runtime -->
+  <h1 v-show="vShowSample">Hello!</h1>
+</div>
+<script>
+var app7 = new Vue({
+  el: '#container',
+  data: {
+    type : 'D',
+    loginType : 'username'
+  },
+  methods: {
+    vShowSample : true,
+    toggleLoginType : function() {
+      console.log(this.loginType);
+      this.loginType = (this.loginType === 'username' ? 'email' : 'username');
+    }
+  }
+})
+</script>
