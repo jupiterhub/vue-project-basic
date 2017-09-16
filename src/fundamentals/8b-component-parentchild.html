@@ -1,0 +1,99 @@
+<script src="https://unpkg.com/vue"></script>
+
+<div id="example">
+  <child message="hello!"></child>
+  <!--html is case insensitive so use kebab case (hyphen-separated) instead of camel  -->
+  <child additional-message="there!"></child>
+
+  <div>
+    <input v-model="parentMsg">
+    <br>
+    <child v-bind:message="parentMsg"></child>
+    <!-- drop v-bind for shorthand -->
+    <child :message="parentMsg"></child>
+  </div>
+
+  <todo-item v-bind="todo"></todo-item>
+
+</div>
+
+
+<script>
+Vue.component('child', {
+  // declare the props
+  props: ['message', 'additionalMessage'],
+  // just like data, the prop can be used inside templates
+  // and is also made available in the vm as this.message
+  template: '<span>{{ message }} {{additionalMessage}}</span>'
+})
+
+Vue.component('todo-item', {
+  props: {
+    text : {
+      type : [String, Number],
+      required : false
+    },
+    isComplete : Boolean
+  },
+  template: '<span>{{text}} : {{isComplete}}</span>'
+});
+
+new Vue({
+  el : '#example',
+  data : {
+    parentMsg : '',
+    todo: {
+      text: 'Learn Vue',
+      isComplete: false
+    }
+  }
+});
+
+// full example of property validation on components
+// (warning is produced on console if it doesn't match)
+/*
+
+Vue.component('example', {
+  props: {
+    // basic type check (`null` means accept any type)
+    propA: Number,
+    // multiple possible types
+    propB: [String, Number],
+    // a required string
+    propC: {
+      type: String,
+      required: true
+    },
+    // a number with default value
+    propD: {
+      type: Number,
+      default: 100
+    },
+    // object/array defaults should be returned from a
+    // factory function
+    propE: {
+      type: Object,
+      default: function () {
+        return { message: 'hello' }
+      }
+    },
+    // custom validator function
+    propF: {
+      validator: function (value) {
+        return value > 10
+      }
+    }
+  }
+})
+
+
+TYPES:
+String
+Number
+Boolean
+Function
+Object
+Array
+Symbol
+*/
+</script>
