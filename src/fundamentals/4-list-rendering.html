@@ -1,0 +1,80 @@
+<script src="https://unpkg.com/vue"></script>
+
+<div id="container">
+  <ul id="example-1">
+  <li v-for="item in items">
+     <!-- you can also use for -->
+    {{ item.message }}
+  </li>
+  </ul>
+
+  <!-- notice  data access outside of the items -->
+  <ul id="example-2">
+  <li v-for="(item, index) in items">
+      {{ parentMessage }} - {{ index }} - {{ item.message }}
+  </li>
+  </ul>
+
+  <div v-for="item of items"></div>
+
+  <!-- Loop through all the property values of the object -->
+  <!-- implementation is based on Object.keys(), order not guaranteed throughout javascript applications -->
+
+ <!-- recommended to use key with v-for, updating is not reliable when you have temporary dom states (e.g form input values) -->
+  <ul id="v-for-object" class="demo">
+    <li v-for="(value2, key2, index) in object" :key="key2">
+      {{index}}. {{key2}} : {{ value2 }}
+    </li>
+  </ul>
+  <!-- Dynamically add to the list by writing app.items.push({message:'Baz'}); in the console -->
+
+  <li v-for="n in evenNumbers">{{ n }}</li>
+  <!-- if computed is too complicated, you can use a method) -->
+  <li v-for="n in even(numbers)">{{ n }}</li>
+
+  <!-- range -->
+  <div>
+    <span v-for="n in 10">{{ n }} </span>
+  </div>
+
+  <ul>
+    <template v-for="item in items">
+      <li>{{ item.message }}</li>
+      <li class="divider"></li>
+    </template>
+  </ul>
+
+</div>
+
+<script>
+var app = new Vue({
+  el: '#container',
+  data: {
+    parentMessage: 'Parent',
+    numbers: [ 1, 2, 3, 4, 5 ],
+    items: [
+      { message: 'Foo' },
+      { message: 'Bar' }
+    ],
+    object: {
+     firstName: 'John',
+     lastName: 'Doe',
+     age: 30
+   }
+ },
+ computed: {
+  evenNumbers: function () {
+    return this.numbers.filter(function (number) {
+      return number % 2 === 0
+      })
+    }
+  },
+  methods: {
+    even : function(numbers) {
+      return numbers.filter(function (number) {
+        return number % 2 === 0
+      })
+    }
+  }
+})
+</script>
